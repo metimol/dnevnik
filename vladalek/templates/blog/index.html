@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load pagination_tags %}
+
+{% block script %}
+<link rel="stylesheet" href="{% static 'css/blog/index.css' %}">
+<script src="{% static 'js/blog/index.js' %}"></script>
+<link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@1,300&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<div class="open_border">
+	<div class="open">
+		<span class='category'>
+			{% if category %}
+			{{ category }}
+			{% else %}
+			Категория
+			{% endif %}
+		</span>
+		<ion-icon name="chevron-down-outline" id="ion"></ion-icon>
+	</div>
+	<div class="categories">
+	{% if category %}
+	<a href="{% url 'blog:index' %}">Все статьи</a>
+	{% endif %}
+	{% for a in categories_list %}
+	<a href="?category={{a.category}}">{{a.category}}</a>
+	{% endfor %}
+	</div>
+</div>
+
+{% if articles_list %}
+{% for a in articles_list %}
+<div class="card" onclick="window.location='{% url "blog:detail" a.id %}';">
+	<div class="title">
+		{{ a.pub_date }}
+	</div>
+</div>
+{% endfor %}
+{% else %}
+<div class="no">Статей нет :(</div>
+{% endif %}
+
+<div class="pages">
+	{% if paginator.num_pages > 7 %}
+	{% if page_list.0 != 1 %}
+	<a href="?{% url_replace request 'page' 1 %}" id="page">1</a>
+	<span>...</span>
+	{% endif %}
+	{% for a in page_list %}
+	<a href="?{% url_replace request 'page' a %}" id="page">{{a}}</a>
+	{% endfor %}
+	{% if page_list|last != paginator.num_pages|add:"-1" %}
+	<span>...</span>
+	{% endif %}
+	<a href="?{% url_replace request 'page' paginator.num_pages %}" id="page">{{ paginator.num_pages }}</a>
+	{% else %}
+	{% for a in page_list %}
+	<a href="?{% url_replace request 'page' a %}" id="page">{{a}}</a>
+	{% endfor %}
+	{% endif %}
+</div>
+
+{% endblock %}

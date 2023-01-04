@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block script %}
+<link rel="stylesheet" href="{% static 'css/blog/detail.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block title %}{{a.article_title}}{% endblock %}
+
+{% block content %}
+	
+	<div class="card">
+		<div class="title">
+			<p>{{a.pub_date}}</p>
+		</div>
+		<div class="content">
+			<div class="text">
+				{{a.article_text | safe}}
+			</div>
+			<div class="date">
+				{{a.pub_date}}
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
