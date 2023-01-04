@@ -23,7 +23,6 @@ INSTALLED_APPS = [
     'tinymce',
     'blog.apps.BlogConfig',
     'home.apps.HomeConfig',
-    'django_rename_app',
 ]
 
 MIDDLEWARE = [
