@@ -9,6 +9,9 @@ __pycache__/
 #shell files
 *.sh
 
+#JSON files
+*.json
+
 # Distribution / packaging
 .Python
 build/
