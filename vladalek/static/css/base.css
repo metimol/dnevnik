@@ -13,7 +13,7 @@ body {
 header {
    height: 3.375rem;
    width: 100%;
-   background: #ac6acd;
+   background: linear-gradient(110deg, #0000FF 60%, #FDDA0D 60%);
    position: fixed;
    left: 0;
    top: 0;
@@ -70,7 +70,7 @@ header .avatar i {
   text-align: left;
   top: 0;
   left: 0;
-  background-color: #696969;
+  background: linear-gradient(110deg, #0000FF 60%, #FDDA0D 60%);
   overflow-x: hidden;
   padding-top: 3.75rem;
   transition: 0.5s;

@@ -57,11 +57,10 @@
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 1rem;
-	padding: 0.1rem;
+	padding: 0.7rem;
 	background: white;
 	border: 1px solid black;
 	border-radius: 10px;
-	padding: 2rem;
 	cursor: pointer;
 }
 .title {
@@ -83,20 +82,6 @@
 	margin-top: 0.8rem;
 	text-align: right;
 	font-size: 15px;
-}
-.author {
-	position: absolute;
-	left: 0.5rem;
-	font-family: cursive;
-	font-size: 1.3rem;
-}
-.author b {
-	position: relative;
-	bottom: 0.6rem;
-}
-.author img {
-	width: 1.8rem;
-	height: 1.8rem;
 }
 .information span {
 	position: relative;
@@ -121,22 +106,4 @@
 .pages span {
 	color: white;
 	padding: 0.4rem;
-}
-.add {
-	position: fixed;
-	height: 3.5rem;;
-	bottom: 1rem;
-	right: 1rem;
-	z-index: 10;
-	color: #2aa878;
-	font-size: 3.6rem;
-	text-align: center;
-	cursor: pointer;
-}
-.no {
-	width: 100%;
-	padding-top: 4rem;
-	text-align: center;
-	font-size: 2.2rem;
-	color: white;
 }
