@@ -30,6 +30,7 @@ TINYMCE_DEFAULT_CONFIG = {
 	'width': 750,
 	'cleanup_on_startup': True,
 	'custom_undo_redo_levels': 20,
+	'valid_elements': '*[*]',
 	'plugins': '''
 	textcolor save link image media preview codesample contextmenu
 	table code lists fullscreen insertdatetime nonbreaking

@@ -1,109 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
 .content {
 	padding-top: 3rem;
-	display: relative;
+	font-family: "Montserrat", sans-serif;
+  width: 100%;
+  height: 100vh;
+  background-image: linear-gradient(45deg, #0000FF 14.7%, #FDDA0D 73%);
+  background-size: 200% 200%;
+  -webkit-animation: gradient 15s ease infinite;
+          animation: gradient 15s ease infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
-.open_border {
-	height: auto;
-	border-radius: 0.5rem;
-	padding: 0.1rem;
-	width: 55%;
-	top: 4rem;
-	position: absolute;
-	z-index: 5;
-	overflow: hidden;
-	right: 22.5%;
-	background: #50dfdb;
+@-webkit-keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
-.open {
-	width: 100%;
-	height: 100%;
-	border-radius: 0.5rem;
-	background: #383838;
-	color: white;
-	text-align: center;
-	font-size: 1.5rem;
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
-.open ion-icon {
-	font-size: 1.6rem;
-	float: right;
-	margin-top: 0.2rem;
-	transition: 0.4s;
+h1 {
+  margin: 0;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 32px;
+  color: #26384E;
+  transform: translateY(20px);
+  transition: all .4s ease;
+  transition-delay: .2s;
+  overflow: hidden;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  
+  @media screen and (max-width: 520px) {&{
+    font-size: 16px;
+    line-height: 24px;
+   }}
 }
-.categories {
-	height: 0;
-	width: 100%;
-	max-height: 40%;
-	border-bottom-left-radius: 0.5rem;
-	border-bottom-right-radius: 0.5rem;
-	background: #383838;
-	overflow: hidden;
-	z-index: 10;
+
+p {
+  font-size: 16px;
+  line-height: 24px;
+  color: #889DB8;
+  transform: translateY(20px);
+  transition: all .4s ease;
+  transition-delay: .3s;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+  @media screen and (max-width: 520px) {&{
+    font-size: 14px;
+    line-height: 20px;
+  }}
 }
-.categories a {
-	padding: 0.7rem;
-	text-decoration: none;
-	font-size: 1.4rem;
-	color: white;
-	display: block;
-	transition: 0.3s;
-	outline: none;
+
+.swiper-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+  position: relative;
 }
-.categories a:hover {
-	color: #808080;
+
+.swiper-container {
+  background: linear-gradient(270deg, rgba(247,249,255,1) 0%, rgba(242,246,255,1) 100%);
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  width: 100%;
+  position: relative;
+  max-width: 80vw;
+  height: 100%;
+  max-height: 70vh;
+  border-radius: 10px;
 }
-.card {
-	position: relative;
-	width: 90%;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 1rem;
-	padding: 0.7rem;
-	background: white;
-	border: 1px solid black;
-	border-radius: 10px;
-	cursor: pointer;
+
+.slider-image-wrapper {
+  height: 200px;
+  width: 100%;
+  overflow: hidden;
 }
-.title {
-	font-family: 'Londrina Solid', cursive;
-    font-size: 1.6rem;
-    width: 100%;
-    text-align: center;
+
+.slider-item {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  opacity: 0;
+  background: linear-gradient(270deg, rgba(247,249,255,1) 0%, rgba(242,246,255,1) 100%);
+  cursor: grab;
+  
+  &-content {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: .4s;
+    
+    > * {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  }
 }
-.about{
-	font-family: 'Roboto Condensed', sans-serif;
-	font-size: 1.4rem;
-	margin-top: 1rem;
-	margin-left: 0.2rem;
+
+.swiper-slide-active {
+  .slider-item-content > * {
+    transform: translateY(0px);
+    opacity: 1;
+  }
 }
-.information {
-	width: 100%;
-	min-height: 2rem;
-	position: relative;
-	margin-top: 0.8rem;
-	text-align: right;
-	font-size: 15px;
+
+.slider-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: .2s;
 }
-.information span {
-	position: relative;
-	top: 0.3rem;
+
+.swiper-pagination {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  transform: translatex(-50%);
+  z-index: 1;
+  width: auto!important;
 }
-.pages {
-	max-width: 95%;
-	text-align: center;
-	margin: 2rem;
-	margin-left: auto;
-	margin-right: auto;
-	font-size: 1.4rem;
+
+.swiper-pagination-bullet {
+	border-radius: 0;
+	width: 8px;
+  height: 8px;
+  border-radius: 50%;
+	line-height: 30px;
+	font-size: 12px;
+	opacity: 1;
+	background: rgba(255, 185, 0,0.3);
+  display: inline-block;
+  margin-right: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
 }
-.pages a {
-	text-decoration: none;
-	outline: none;
-	color: black;
-	background: white;
-	padding-left: 0.4rem;
-	padding-right: 0.4rem;
+
+.swiper-pagination-bullet-active {
+	background: #FFB200;
+  width: 20px;
+  border-radius: 10px;
 }
-.pages span {
-	color: white;
-	padding: 0.4rem;
+
+.slider-buttons {
+  position: absolute;
+  display: flex;
+  top: 100%;
+  justify-content: flex-end;
+  width: 100%;
+  padding-top: 8px;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  position: relative;
+  margin-left: 4px;
+  
+  &:before {
+    content: '';
+    position: absolute;
+    background-color: #fff;
+    height: 1px;
+    width: 0;
+    left: 0;
+    //top: 50%;
+    //transform: translatey(-50%);
+    bottom: -1px;
+    transition: .2s;
+  }
+  
+  &:hover:before { width: 100%; }
+}
+
+.socials {
+  position: fixed;
+  top: 12px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  
+  .social-link {
+    display: inline-block;
+    margin-left: 8px;
+    color: #fff;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .swiper-button-next:hover:before,
+  .swiper-button-prev:hover:before {
+  display: none;
+  }
 }

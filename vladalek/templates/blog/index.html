@@ -3,67 +3,44 @@
 {% load pagination_tags %}
 
 {% block script %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel="stylesheet" href="{% static 'css/blog/index.css' %}">
-<script src="{% static 'js/blog/index.js' %}"></script>
 <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@300&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@1,300&display=swap" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
 
-<div class="open_border">
-	<div class="open">
-		<span class='category'>
-			{% if category %}
-			{{ category }}
-			{% else %}
-			Категория
-			{% endif %}
-		</span>
-		<ion-icon name="chevron-down-outline" id="ion"></ion-icon>
-	</div>
-	<div class="categories">
-	{% if category %}
-	<a href="{% url 'blog:index' %}">Все статьи</a>
-	{% endif %}
-	{% for a in categories_list %}
-	<a href="?category={{a.category}}">{{a.category}}</a>
-	{% endfor %}
-	</div>
-</div>
-
 {% if articles_list %}
-{% for a in articles_list %}
-{% if not a.article_private %}
-<div class="card" onclick="window.location='{% url "blog:detail" a.id %}';">
-	<div class="title">
-		{{ a.pub_date }}
-	</div>
+<div class="swiper-container">
+  <div class="swiper-wrapper">
+		{% for a in articles_list %}
+		{% if not a.article_private %}
+    <div class="slider-item swiper-slide" onclick="window.location='{% url "blog:detail" a.id %}';">
+      <div class="slider-image-wrapper">
+        <img class="slider-image" src="https://images.unsplash.com/photo-1498307833015-e7b400441eb8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2600&q=80" alt="SliderImg">
+        </div>
+      <div class="slider-item-content">
+        <h1>{{ a.pub_date }}</h1>
+        <p>{{ a.article_about }}</p>
+      </div>
+    </div>
+		{% endif %}
+		{% endfor %}
+  </div>
+  <div class="slider-buttons">
+      <button class="swiper-button-prev">Назад</button>
+      <button class="swiper-button-next">След.</button>
+  </div>
+
+  <div class="swiper-pagination"></div>
 </div>
 {% endif %}
-{% endfor %}
-{% else %}
-<div class="no">Статей нет :(</div>
-{% endif %}
 
-<div class="pages">
-	{% if paginator.num_pages > 7 %}
-	{% if page_list.0 != 1 %}
-	<a href="?{% url_replace request 'page' 1 %}" id="page">1</a>
-	<span>...</span>
-	{% endif %}
-	{% for a in page_list %}
-	<a href="?{% url_replace request 'page' a %}" id="page">{{a}}</a>
-	{% endfor %}
-	{% if page_list|last != paginator.num_pages|add:"-1" %}
-	<span>...</span>
-	{% endif %}
-	<a href="?{% url_replace request 'page' paginator.num_pages %}" id="page">{{ paginator.num_pages }}</a>
-	{% else %}
-	{% for a in page_list %}
-	<a href="?{% url_replace request 'page' a %}" id="page">{{a}}</a>
-	{% endfor %}
-	{% endif %}
-</div>
+{% endblock %}
 
+{% block js %}
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.5/swiper-bundle.min.js'></script>
+<script src="{% static 'js/blog/index.js' %}"></script>
 {% endblock %}
