@@ -1,44 +1,29 @@
-import string
-from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.urls import reverse
-from django.core.paginator import Paginator
-from .models import Articles, Categories
+from django.http import HttpResponseRedirect
+from .models import Articles
+from django.db.models.functions import Extract
+
+def categories(request):
+	def get_dates(articles):
+		dates = articles.annotate(month = Extract('pub_date', 'month'), year = Extract('pub_date', 'year')).values('month', 'year').distinct()
+		return [f'{date["month"]} - {date["year"]}' for date in dates]
+	articles = Articles.objects.all()
+	dates = get_dates(articles)
+	context = {'dates': dates}
+	return render(request, 'blog/categories.html', context,)
 
 def index(request):
-	category = request.GET.get('category', '')
-	page_num = request.GET.get('page', '')
-	categories_list = Categories.objects.order_by('category')
-	if category:
-		try:
-			cat = Categories.objects.get(category=category)
-			articles_list = cat.articles.order_by('-id')
-		except:
-			return render(request, "404.html")
+	def get_articles_by_date(articles, date):
+		month, year = date.split(' - ')
+		return articles.filter(pub_date__month=month, pub_date__year=year)
+	date = request.GET.get('date', '')
+	if date:
+		articles = Articles.objects.all()
+		articles_list = get_articles_by_date(articles, date)
+		context = {'articles_list': articles_list}
+		return render(request, 'blog/index.html', context,)
 	else:
-		articles_list = Articles.objects.order_by('-id')
-	if articles_list:
-		paginator = Paginator(articles_list, 10)
-		if not page_num:
-			page_num = 1
-		page = paginator.get_page(page_num)
-		page_list = []
-		if paginator.num_pages>1:
-			if paginator.num_pages>7:
-				if int(page_num)<paginator.num_pages-5:
-					for i in range(int(page_num), int(page_num)+5):
-						page_list.append(i)
-				else:
-					for i in range(paginator.num_pages-5, paginator.num_pages):
-						page_list.append(i)
-			else:
-				for i in range(1, paginator.num_pages+1):
-					page_list.append(i)
-		context = {'page': page, 'articles_list': page.object_list, 'categories_list': categories_list, 'category': category, 'paginator': paginator, 'page_list':page_list}
-	else:
-		return render(request, "blog/index.html", {"categories_list": categories_list})
-	
-	return render(request, 'blog/index.html', context,)
+		return render(request, "404.html")
 
 def detail(request, article_id):
 	try:

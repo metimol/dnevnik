@@ -1,0 +1,18 @@
+ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+}
+li {
+  margin: 10px 0;
+  width: 50%;
+  text-align: center;
+}
+a {
+  color: blue;
+  text-decoration: none;
+  font-size: 1.5rem
+}

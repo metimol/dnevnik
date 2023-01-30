@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block script %}
+<link rel="stylesheet" href="{% static 'css/blog/categories.css' %}">
+{% endblock %}
+
+{% block content %}
+<ul>
+{% for i in dates %}
+  <li><a href="{% url 'blog:index' %}?date={{ i }}">{{ i }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}
