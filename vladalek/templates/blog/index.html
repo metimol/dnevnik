@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load random_numbers %}
 {% load static %}
 
 {% block script %}
@@ -15,7 +16,7 @@
 		{% if not a.article_private %}
     <div class="slider-item swiper-slide" onclick="window.location='{% url "blog:detail" a.id %}';">
       <div class="slider-image-wrapper">
-        <img class="slider-image" src="https://images.unsplash.com/photo-1498307833015-e7b400441eb8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2600&q=80" alt="SliderImg">
+        <img class="slider-image" src='{% random_image images %}' alt="SliderImg">
         </div>
       <div class="slider-item-content">
         <h1>{{ a.pub_date }}</h1>

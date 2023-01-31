@@ -81,6 +81,7 @@ TEMPLATES = [
             ],
             'libraries': {
             	'pagination_tags': 'vladalek.templatetags.pagination_tags',
+            	'random_numbers': 'vladalek.templatetags.random_numbers',
             },
         },
     },
